@@ -1,0 +1,285 @@
+
+
+mysql> create database payroll;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use payroll;
+Database changed
+
+mysql> create table user
+    -> (userid varchar(30)NOT NULL PRIMARY KEY,
+    -> username varchar(20)NOT NULL,
+    -> status varchar(10),
+    -> usertype varchar(15)NOT NULL,
+    -> password varchar(20)NOT NULL,
+    -> UNIQUE(PASSWORD));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DESC USER;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| userid   | int(11)     | NO   | PRI | NULL    |       |
+| username | varchar(20) | NO   |     | NULL    |       |
+| status   | varchar(10) | YES  |     | NULL    |       |
+| usertype | varchar(15) | NO   |     | NULL    |       |
+| password | int(11)     | NO   | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select*from user;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO USER VALUES(1,"ANKITA KAMBOJ","ACTIVE ","ADMIN","101");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO USER VALUES(2,"ANKIT NARULA","ACTIVE ","ADMIN","202");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO USER VALUES(3,"AKANSHA CHAUHAN","ACTIVE ","EMPLOYEE","303");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO USER VALUES(4,"ARJUN TYAGI","ACTIVE","EMPLOYEE","404");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO USER VALUES(5,"DIKSHANT CHAWLA","ACTIVE ","EMPLOYEE","505");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO USER VALUES(6,"HARGUN ARORA","ACTIVE","EMPLOYEE","606");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO USER VALUES (7,"MANIK JAIN","ACTIVE ","EMPLOYEE","707");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO USER VALUES(8,"PREETI SETHI","ACTIVE  ","EMPLOYEE","808");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO USER VALUES (9,"PRIYA JUNEJA","ACTIVE ","EMPLOYEE","909");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO USER VALUES (10,"RIYA KAKKAR","ACTIVE ","EMPLOYEE","10010");
+Query OK, 1 row affected (0.02 sec)
+mysql> select *from user;
++--------+-----------------+---------+----------+----------+
+| userid | USERNAME        | STATUS  | USERTYPE | PASSWORD |
++--------+-----------------+---------+----------+----------+
+|      1 | ANKITA KAMBOJ   | ACTIVE  | ADMIN    |      101 |
+|      2 | ANKIT NARULA    | ACTIVE  | ADMIN    |      202 |
+|      3 | AKANSHA CHAUHAN | ACTIVE  | EMPLOYEE |      303 |
+|      4 | ARJUN TYAGI     | ACTIVE  | EMPLOYEE |      404 |
+|      5 | DIKSHANT CHAWLA | ACTIVE  | EMPLOYEE |      505 |
+|      6 | HARGUN ARORA    | ACTIVE  | EMPLOYEE |      606 |
+|      7 | MANIK JAIN      | ACTIVE  | EMPLOYEE |      707 |
+|      8 | PREETI SETHI    | ACTIVE  | EMPLOYEE |      808 |
+|      9 | PRIYA JUNEJA    | ACTIVE  | EMPLOYEE |      909 |
+|     10 | RIYA KAKKAR     | ACTIVE  | EMPLOYEE |    10010 |
++--------+-----------------+---------+----------+----------+
+
+10 rows in set (0.00 sec)
+
+mysql> create table employee
+    -> (employeename varchar(30),
+    -> employeeId integer NOT NULL PRIMARY KEY,
+    -> salary double(10,2),
+    -> designation varchar(30),
+    -> contactnumber BIGINT,
+    -> userId integer NOT NULL,
+    -> status varchar(10),
+    -> password integer NOT NULL,
+    -> UNIQUE(PASSWORD),
+    -> UNIQUE(USERID));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> ALTER TABLE EMPLOYEE ADD CONSTRAINT fk_1 FOREIGN KEY(USERID)REFERENCES USER(USERID) ON DELETE CASCADE ON UPDATE CASCADE;
+
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| employeename  | varchar(30)  | YES  |     | NULL    |       |
+| employeeId    | int(11)      | NO   | PRI | NULL    |       |
+| salary        | double(10,2) | YES  |     | NULL    |       |
+| designation   | varchar(30)  | YES  |     | NULL    |       |
+| contactnumber | bigint(20)   | YES  |     | NULL    |       |
+| userId        | int(11)      | NO   | UNI | NULL    |       |
+| status        | varchar(10)  | YES  |     | NULL    |       |
+| password      | int(11)      | NO   | UNI | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("AKANSHA CHAUHAN",33,480000.00,"ACCOUNTANT",9998887776,3,"ACTIVE","303");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("ARJUN TYAGI",44 ,360000.00,"SALES MANAGER",9876543210,4,"ACTIVE","404");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("DIKSHANT CHAWLA",55,420000.00,"ACCOUNTING MANAGER",9737376204,5,"ACTIVE","505");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("HARGUN ARORA",66,480000.00,"MARKETING MANAGER",8277589089,6,"ACTIVE","606");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("MANIK JAIN",77,360000.00,"CLERK",9321567899,7,"ACTIVE","707");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("PREETI SETHI",88,420000.00,"PROGRAMMER",8415244366,8,"ACTIVE","808");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("PRIYA JUNEJA",99,444000.00,"ANALYST",7017778321,9,"ACTIVE","909");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("RIYA KAKKAR",1010,360000.00,"CLERK",8943326192,10,"ACTIVE","10010");
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> SELECT* FROM EMPLOYEE;
++-----------------+------------+-----------+--------------------+---------------+--------+--------+----------+
+| employeename    | employeeId | SALARY    | designation        | contactnumber | USERID | status | password |
++-----------------+------------+-----------+--------------------+---------------+--------+--------+----------+
+| AKANSHA CHAUHAN |         33 | 480000.00 | ACCOUNTANT         |    9998887776 |      3 | ACTIVE |      303 |
+| ARJUN TYAGI     |         44 | 360000.00 | SALES MANAGER      |    9876543210 |      4 | ACTIVE |      404 |
+| DIKSHANT CHAWLA |         55 | 420000.00 | ACCOUNTING MANAGER |    9837376204 |      5 | ACTIVE |      505 |
+| HARGUN ARORA    |         66 | 480000.00 | MARKETING MANAGER  |    8277589089 |      6 | ACTIVE |      606 |
+| MANIK JAIN      |         77 | 360000.00 | CLERK              |    9321567899 |      7 | ACTIVE |      707 |
+| PREETI SETHI    |         88 | 420000.00 | PROGRAMMER         |    8415244366 |      8 | ACTIVE |      808 |
+| PRIYA JUNEJA    |         99 | 444000.00 | ANALYST            |    7017778321 |      9 | ACTIVE |      909 |
+| RIYA KAKKAR     |       1010 | 360000.00 | CLERK              |    8943326192 |     10 | ACTIVE |    10010 |
++-----------------+------------+-----------+--------------------+---------------+--------+--------+----------+
+8 rows in set (0.00 sec)
+mysql> create table salary
+       (salaryId  integer NOT NULL PRIMARY KEY,
+       employeeId  INTEGER NOT NULL,
+       month varchar(10)NOT NULL,
+       designation varchar(30),
+       incentive double(10,2),
+       leavecount integer,
+       salary double(10,2)NOT NULL,
+       deduction double(10,2),
+       netsalary double(10,2)NOT NULL,
+       UNIQUE(EMPLOYEEID));
+       
+
+mysql> ALTER TABLE SALARY ADD CONSTRAINT fk_3 FOREIGN KEY(EMPLOYEEID)REFERENCES EMPLOYEE(EMPLOYEEID) ON DELETE CASCADE ON UPDATE CASCADE;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc salary;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| salaryId   | int(11)      | NO   | PRI | NULL    |       |
+| employeeId | int(11)      | NO   | UNI | NULL    |       |
+| month      | varchar(10)  | NO   |     | NULL    |       |
+| incentive  | double(10,2) | YES  |     | NULL    |       |
+| leavecount | int(11)      | YES  |     | NULL    |       |
+| salary     | double(10,2) | NO   |     | NULL    |       |
+| deduction  | double(10,2) | YES  |     | NULL    |       |
+| netsalary  | double(10,2) | NO   |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO SALARY VALUES(3333,33,"AUGUST",0.00,2,480000.00,2000.00,478000.00);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO SALARY VALUES(4444,44,"FEBRAURY",5000.00,3,360000.00,3000.00,362000.00);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO SALARY VALUES(5555,55,"MAY",0.00,3,420000.00,3000.00,417000.00);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO SALARY VALUES(6666,66,"SEPTEMBER",2000.00,1,480000.00,1000.00,479000.00);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO SALARY VALUES(7777,77,"JULY",0.00,0,360000.00,0.00,360000.00);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO SALARY VALUES(8888,88,"MAY",3000.00,0,420000.00,0.00,420000.00);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO SALARY VALUES(9999,99,"FEBRUARY",0.00,2,444000.00,2000.00,442000.00);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO SALARY VALUES(10101010,1010,"MARCH",3000.00,1,360000.00,1000.00,359000.00);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM SALARY;
++----------+------------+-----------+-----------+------------+-----------+-----------+-----------+
+| SALARYID | EMPLOYEEID | MONTH     | INCENTIVE | LEAVECOUNT | SALARY    | DEDUCTION | NETSALARY |
++----------+------------+-----------+-----------+------------+-----------+-----------+-----------+
+|     3333 |         33 | AUGUST    |      0.00 |          2 | 480000.00 |   2000.00 | 478000.00 |
+|     4444 |         44 | FEBRAURY  |   5000.00 |          3 | 360000.00 |   3000.00 | 362000.00 |
+|     5555 |         55 | MAY       |      0.00 |          3 | 420000.00 |   3000.00 | 417000.00 |
+|     6666 |         66 | SEPTEMBER |   2000.00 |          1 | 480000.00 |   1000.00 | 479000.00 |
+|     7777 |         77 | JULY      |      0.00 |          0 | 360000.00 |      0.00 | 360000.00 |
+|     8888 |         88 | MAY       |   3000.00 |          0 | 420000.00 |      0.00 | 420000.00 |
+|     9999 |         99 | FEBRUARY  |      0.00 |          2 | 444000.00 |   2000.00 | 442000.00 |
+| 10101010 |       1010 | MARCH     |   3000.00 |          1 | 360000.00 |   1000.00 | 359000.00 |
++----------+------------+-----------+-----------+------------+-----------+-----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> create table leaves
+    -> (employeeId INTEGER NOT NULL,
+    -> leaveId INTEGER NOT NULL PRIMARY KEY,
+    -> reason TINYTEXT,
+    -> leavedate date,
+    -> UNIQUE(EMPLOYEEID));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> ALTER TABLE LEAVES ADD CONSTRAINT fk_2 FOREIGN KEY(EMPLOYEEID)REFERENCES EMPLOYEE(EMPLOYEEID)ON DELETE CASCADE ON UPDATE CASCADE;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> desc leaves;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| employeeId | int(11)     | NO   | UNI | NULL    |       |
+| leaveId    | int(11)     | NO   | PRI | NULL    |       |
+| reason     | tinytext    | YES  |     | NULL    |       |
+| leavedate  | date        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+mysql> INSERT INTO LEAVES VALUES(33,330," URGENT PIECE OF WORK AT HOME","17-08-27");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO LEAVES VALUES(44,440," SUFFERING FROM MALARIA ","17-02-23");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO LEAVES VALUES(55,550,"SUFFERING FROM DENGUE ","17-05-15");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO LEAVES VALUES(66,660,"URGENT PIECE OF WORK AT HOME ","17-09-17");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO LEAVES VALUES(77,770," BROTHER'S MARRIAGE","17-07-21");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO LEAVES VALUES(88,880,"URGENT PIECE OF WORK AT HOME","17-05-16");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO LEAVES VALUES(99,990," FAMILY OBLIGATIONS ","17-02-06");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO LEAVES VALUES(1010,10100,"PERSONAL REASON  ","17-03-09");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM LEAVES;
++------------+---------+------------------------------+------------+
+| EMPLOYEEID | LEAVEID | REASON                       | LEAVEDATE  |
++------------+---------+------------------------------+------------+
+|         33 |     330 | URGENT PIECE OF WORK AT HOME | 2017-08-27 |
+|         44 |     440 | SUFFERING FROM MALARIA       | 2017-02-23 |
+|         55 |     550 | SUFFERING FROM DENGUE        | 2017-05-15 |
+|         66 |     660 | URGENT PIECE OF WORK AT HOME | 2017-09-17 |
+|         77 |     770 | BROTHER'S MARRIAGE           | 2017-07-21 |
+|         88 |     880 | URGENT PIECE OF WORK AT HOME | 2017-05-16 |
+|         99 |     990 | FAMILY OBLIGATIONS           | 2017-02-06 |
+|       1010 |   10100 | PERSONAL REASON              | 2017-03-09 |
++------------+---------+------------------------------+------------+
+8 rows in set (0.00 sec)
